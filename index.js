@@ -105,7 +105,11 @@ app.get('/api/get/:id', (req,res) => {
   const {id} = req.params;
   if(id){
     const paste = veridb.get(id);
-    res.send(paste)
+    res.json({
+      veri: paste.veri,
+      id: paste.id,
+      tarih: paste.tarih
+    })
   }else{
     res.send('require id');
 }})
@@ -164,7 +168,10 @@ app.get('/api/post/:paste', (req,res) => {
       }
     }
     kontrol(password);
-    res.redirect(`/${password}`);
+    res.json({
+      id: password,
+      paste: paste
+    })
   }else{
     res.send('require paste');
 }})
