@@ -1,3 +1,26 @@
-  <h4>
-    Working on...
-  </h4>
+
+  <pre><code>
+    //Get paste.
+    const axios = require('axios');
+    axios.get('https://emrahpaste.tk/api/get/:id')
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
+    //Save paste.
+    axios.post('https://emrahpaste.tk/api/post/:paste', {
+      content: 'You paste.'
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  </code></pre>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>

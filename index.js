@@ -13,6 +13,7 @@ const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+require('dotenv').config();
 
 app.use(expresslayouts);
 app.set("layout", "./layouts/main");
@@ -51,7 +52,7 @@ app.get("/", (req, res) => {
   res.render("index", { title: `EmrahPaste - Home`, req });
 });
 
-app.get("/api-doc", (req, res) => {
+app.get("/api", (req, res) => {
   res.render("api", { title: `EmrahPaste - Api`, req });
 });
 
@@ -99,6 +100,74 @@ app.get("/paste/:id", (req, res) => {
     });
   }
 });
+
+app.get('/api/get/:id', (req,res) => {
+  const {id} = req.params;
+  if(id){
+    const paste = veridb.get(id);
+    res.send(paste)
+  }else{
+    res.send('require id');
+}})
+
+app.get('/api/post/:paste', (req,res) => {
+  let ip = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const {paste} = req.params;
+  if(paste){
+    var password = generator.generate({
+      length: 12,
+      numbers: true
+    });
+    function kontrol(password) {
+      if (veridb.has(password)) {
+        password = generator.generate({
+          length: 12,
+          numbers: true
+        });
+        if (veridb.has(password)) {
+          kontrol(password);
+        } else {
+          const embed = new Discord.MessageEmbed()
+            .setColor("#0099ff")
+            .setTitle(password)
+            .setURL(`https://emrahpaste.glitch.me/${password}`)
+            .setAuthor(ip)
+            .setDescription("Yeni bir veri!")
+            .setTimestamp()
+            .setFooter("<EmrahPaste/>");
+
+          client.channels.cache.get(process.env.LOG_ID).send(embed);
+          veridb.set(`${password}`, {
+            veri: paste,
+            ip: ip,
+            id: password,
+            tarih: moment().format()
+          });
+        }
+      } else {
+        const embed = new Discord.MessageEmbed()
+          .setColor("#0099ff")
+          .setTitle(password)
+          .setURL(`https://emrahpaste.glitch.me/${password}`)
+          .setAuthor(ip)
+          .setDescription("Yeni bir veri!")
+          .setTimestamp()
+          .setFooter("<EmrahPaste/>");
+
+        client.channels.cache.get(process.env.LOG_ID).send(embed);
+        veridb.set(`${password}`, {
+          veri: paste,
+          ip: ip,
+          id: password,
+          tarih: moment().format()
+        });
+      }
+    }
+    kontrol(password);
+    res.redirect(`/${password}`);
+  }else{
+    res.send('require paste');
+}})
 
 app.post("/paste/new", (req, res) => {
   let ip = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
