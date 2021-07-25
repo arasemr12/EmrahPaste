@@ -1,4 +1,4 @@
-# url-shorter
+# EmrahPaste
 
 ### Demo
 
