@@ -1,0 +1,55 @@
+* {
+  color: #fff;
+  list-style: none;
+}
+
+body {
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+textarea,
+input {
+  background: #6f6f6fc7 !important;
+  color: #f2f2f2 !important;
+  border: none !important;
+}
+
+
+  .topnav {
+    background-color: #222222;
+    overflow: hidden;
+    text-align: center;
+    font-size: 37px;
+  }
+
+  .topnav a {
+    color: #f2f2f2;
+    text-decoration: none;
+  }
+
+::placeholder {
+  color: #f2f2f2 !important;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #f2f2f2 !important;
+}
+
+::-ms-input-placeholder {
+  color: #f2f2f2 !important;
+}
+
+footer {
+  background-color: #222222;
+  color: white;
+  padding: 15px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+<form class="form-group" action="/contact" method="POST"><br><br>
+  <input class="form-control" type="email" name="email" placeholder="E-mail" required><br><br>
+  <textarea class="form-control" name="mesaj" placeholder="Message" rows="10" required></textarea><br><br>
+  <% if(locals.mesaj) { %>
+    <span style="color:red;"><%=mesaj%></span><br><br>
+  <% } %>
+  <button class="btn btn-success" type="submit">
+    <i class="fas fa-share"></i>
+    Submit
+  </button>
+</form>
