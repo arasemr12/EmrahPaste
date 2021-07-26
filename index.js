@@ -13,7 +13,15 @@ const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const rateLimit = require("express-rate-limit");
 require('dotenv').config();
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 30
+});
+
+app.use('/api/', limiter);
 
 app.use(expresslayouts);
 app.set("layout", "./layouts/main");
