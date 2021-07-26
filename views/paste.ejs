@@ -1,9 +1,13 @@
 <div class="form-group">
   <textarea
+    id="paste"
     class="form-control"
     rows="10"
-    disabled
+    readonly
   ><%=veri.veri%></textarea>
 </div><br>
+<div class="text-center">
+  <button data-toggle="tooltip" data-placement="top" title="Copied!" onclick="copy()" class="btn btn-success"><i class="fas fa-copy"></i> Copy</button>
+</div>
 ID: <%=veri.id%><br>
 Saved At: <%=veri.tarih%>

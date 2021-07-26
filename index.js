@@ -104,12 +104,19 @@ app.get("/paste/:id", (req, res) => {
 app.get('/api/get/:id', (req,res) => {
   const {id} = req.params;
   if(id){
-    const paste = veridb.get(id);
-    res.json({
-      veri: paste.veri,
-      id: paste.id,
-      tarih: paste.tarih
-    })
+    if (veridb.has(id)) {
+      const paste = veridb.get(id);
+      res.json({
+        veri: paste.veri,
+        id: paste.id,
+        tarih: paste.tarih
+      })
+    }else{
+      res.status(404).json({
+        code: '404',
+        message: 'Not found.'
+      })
+    }
   }else{
     res.send('require id');
 }})
