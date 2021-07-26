@@ -30,7 +30,7 @@ app.use(express.json());
 let online_user_count = 0;
 
 client.on("ready", () => {
-  server.listen(process.env.port, () => {
+  server.listen(process.env.PORT || 3000, () => {
     console.log(`Your app is listening on 3000`);
   });
   console.log(`Logged in as ${client.user.tag}!`);
