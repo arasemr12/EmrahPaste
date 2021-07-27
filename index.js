@@ -129,9 +129,9 @@ app.get('/api/get/:id', (req,res) => {
     res.send('require id');
 }})
 
-app.get('/api/post/:paste', (req,res) => {
+app.post('/api/post', (req,res) => {
   let ip = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  const {paste} = req.params;
+  const {paste} = req.body;
   if(paste){
     var password = generator.generate({
       length: 12,

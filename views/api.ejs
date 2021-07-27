@@ -11,8 +11,8 @@
     })
 
     //Save paste.
-    axios.post('https://emrahpaste.tk/api/post/:paste', {
-      content: 'You paste.'
+    axios.post('https://emrahpaste.tk/api/post/', {
+      paste: 'You paste.'
     })
     .then(function (response) {
       console.log(response.data);
